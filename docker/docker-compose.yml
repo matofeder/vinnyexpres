@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  vinnyexpres-web:
+    container_name: vinnyexpres
+    image: vinnyexpres
+    hostname: docker-vinnyexpres
+    tty: true
+    restart: unless-stopped
+    networks:
+      - vinnyexpres-network
+    build:
+      context: ../
+      dockerfile: docker/vinnyexpres/Dockerfile
+    ports:
+      - 8184:5000
+
+networks:
+  vinnyexpres-network:
