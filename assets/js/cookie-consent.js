@@ -8,7 +8,7 @@
   }
 
   function setCookie(name, value) {
-    document.cookie = name + "=" + encodeURIComponent(value) + "; max-age=" + CONSENT_MAX_AGE + "; path=/; SameSite=Lax";
+    document.cookie = name + "=" + encodeURIComponent(value) + "; max-age=" + CONSENT_MAX_AGE + "; path=/; SameSite=Lax; Secure";
   }
 
   function deleteCookie(name) {
