@@ -24,5 +24,5 @@ setup(
     ],
     packages=find_packages(),
     install_requires=install_requires,
-    extras_require={"dev": ["twine", "wheel", "flake8", "black"]},
+    extras_require={"dev": ["twine", "wheel", "flake8", "black", "pytest==9.1.1"]},
 )
