@@ -2,11 +2,12 @@ from setuptools import setup, find_packages
 
 
 install_requires = [
-    "Flask",
-    "Flask-Bootstrap",
-    "pytz",
-    "dnspython",
-    "uwsgi",
+    "Flask==3.1.3",
+    "Flask-Bootstrap==3.3.7.1",
+    "python-dotenv==1.2.2",
+    "pytz==2026.2",
+    "dnspython==2.8.0",
+    "uwsgi==2.0.31",
 ]
 
 setup(
@@ -15,7 +16,7 @@ setup(
     version="1.0.0",
     author="Matej Feder",
     author_email="feder.mato@gmail.com",
-    python_requires=">=3.6",
+    python_requires=">=3.9",
     classifiers=[
         "Topic :: System :: Web",
         "Programming Language :: Python :: 3",
