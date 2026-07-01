@@ -1,6 +1,6 @@
 ### Vinny expres
 
-Basic flask web for Vinny expres
+Basic flask web for https://vinny-expres.sk/
 
 #### Run
 
