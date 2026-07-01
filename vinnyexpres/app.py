@@ -34,6 +34,11 @@ def privacy_policy():
     return render_template("privacy.html")
 
 
+@app.route("/cookies")
+def cookies_policy():
+    return render_template("cookies.html")
+
+
 AUTO_REPLY = """
 Ďakujeme za prejavený záujem.
 Vašu požiadavku spracujeme a budeme Vás kontaktovať.

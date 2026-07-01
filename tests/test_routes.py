@@ -23,3 +23,12 @@ def test_privacy_page_returns_200(client):
     assert "Zásady ochrany osobných údajov".encode("utf-8") in response.data
     assert b"57695059" in response.data
     assert b'id="cookie-consent-banner"' in response.data
+
+
+def test_cookies_page_returns_200(client):
+    response = client.get("/cookies")
+
+    assert response.status_code == 200
+    assert "Používanie cookies".encode("utf-8") in response.data
+    assert b"cookie_consent" in response.data
+    assert b'id="cookie-consent-banner"' in response.data
