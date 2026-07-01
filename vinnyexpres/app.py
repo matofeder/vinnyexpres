@@ -29,6 +29,11 @@ def main_page():
     return render_template("index.html")
 
 
+@app.route("/ochrana-osobnych-udajov")
+def privacy_policy():
+    return render_template("privacy.html")
+
+
 AUTO_REPLY = """
 Ďakujeme za prejavený záujem.
 Vašu požiadavku spracujeme a budeme Vás kontaktovať.

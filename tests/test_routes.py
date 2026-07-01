@@ -14,3 +14,12 @@ def test_index_page_includes_footer_legal_links(client):
     assert b'href="/ochrana-osobnych-udajov"' in response.data
     assert b'href="/cookies"' in response.data
     assert b'id="cookie-consent-settings-link"' in response.data
+
+
+def test_privacy_page_returns_200(client):
+    response = client.get("/ochrana-osobnych-udajov")
+
+    assert response.status_code == 200
+    assert "Zásady ochrany osobných údajov".encode("utf-8") in response.data
+    assert b"57695059" in response.data
+    assert b'id="cookie-consent-banner"' in response.data
