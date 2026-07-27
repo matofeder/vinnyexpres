@@ -5,7 +5,7 @@ install_requires = [
     "Flask==3.1.3",
     "Flask-Bootstrap==3.3.7.1",
     "python-dotenv==1.2.2",
-    "pytz==2026.2",
+    "pytz==2026.3.post1",
     "dnspython==2.8.0",
     "uwsgi==2.0.31",
 ]
