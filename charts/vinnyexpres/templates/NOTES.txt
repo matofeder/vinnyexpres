@@ -1,0 +1,19 @@
+vinnyexpres {{ .Chart.AppVersion }} is running as {{ include "vinnyexpres.image" . }}.
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}/
+{{- end }}
+{{- else }}
+
+Try it locally:
+  kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "vinnyexpres.fullname" . }} 8080:{{ .Values.service.port }}
+  open http://localhost:8080/
+{{- end }}
+{{- if or (not .Values.email.to) (not .Values.email.from) }}
+
+Note: email.to / email.from are empty, the contact form can't send anything.
+{{- end }}
+{{- if and (not .Values.email.existingSecret) (not .Values.email.password) }}
+
+Note: no email password; set email.existingSecret (recommended) or email.password.
+{{- end }}

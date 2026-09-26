@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # config.py requires these at import time; the tests never send mail
+    env:
+      EMAIL_TO: test@example.com
+      EMAIL_FROM: test@example.com
+      EMAIL_FROM_PASS: test
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: setup.py
+      - run: pip install ".[dev]"
+      # python -m puts the repo root on sys.path, so the checked-out package (with templates/) is used
+      - run: python -m pytest -q
+
+  chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: azure/setup-helm@v5
+      - run: helm lint --strict charts/vinnyexpres
+      - name: Render with every optional resource on
+        run: helm template vinnyexpres charts/vinnyexpres --set ingress.enabled=true --set 'imagePullSecrets[0].name=ghcr-pull' > /dev/null

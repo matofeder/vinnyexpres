@@ -9,3 +9,12 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    ignore:
+      # stay on the Python line the app is tested with; move by hand
+      - dependency-name: "python"
+        update-types: ["version-update:semver-minor"]

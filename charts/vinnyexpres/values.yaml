@@ -1,0 +1,63 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/matofeder/vinnyexpres
+  # Defaults to the chart's appVersion, i.e. chart 1.4.2 runs image 1.4.2.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# Only needed if the ghcr.io package is private, e.g. [{ name: ghcr-pull }].
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+
+# Contact form: submissions go to `to`, sent through Gmail SMTP as `from`.
+email:
+  to: ""            # comma separated
+  from: ""
+  # Secret with the Gmail app password under the key EMAIL_FROM_PASS (recommended):
+  #   kubectl -n vinnyexpres create secret generic vinnyexpres-email --from-literal=EMAIL_FROM_PASS=...
+  existingSecret: ""
+  # Used only when existingSecret is empty: the chart then creates the Secret itself.
+  password: ""
+
+# Extra container env vars, e.g. [{ name: LOG_TO_CONSOLE, value: "false" }].
+extraEnv: []
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: vinny-expres.sk
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+  #  - secretName: vinny-expres-sk-tls
+  #    hosts: [vinny-expres.sk, www.vinny-expres.sk]
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 96Mi
+  limits:
+    memory: 256Mi
+
+# Keeps at least one pod up during node drains (only rendered when replicaCount > 1).
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+topologySpreadConstraints: []
